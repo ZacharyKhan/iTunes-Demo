@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    private let navController : UINavigationController = {
+    private let navController1 : UINavigationController = {
         let nc = UINavigationController(rootViewController: Top40ViewController())
         nc.navigationBar.isTranslucent = false
         nc.navigationBar.barTintColor = .white
@@ -24,8 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+//        let tabBarController = UITabBarController()
+//        let controllers = [navController1,navController2]
+//        tabBarController.viewControllers = controllers
+        
         window = UIWindow()
-        window?.rootViewController = navController
+        window?.rootViewController = navController1
         window?.makeKeyAndVisible()
     
         return true

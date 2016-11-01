@@ -8,10 +8,10 @@
 
 import UIKit
 
-private let TrackCellIdentifier = "TrackTableViewCell"
-private let ArtistCellIdentifier = "ArtistTableViewCell"
-
 class SearchViewController: UIViewController {
+    
+    let TrackCellIdentifier = "TrackTableViewCell"
+    let ArtistCellIdentifier = "ArtistTableViewCell"
     
     let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
     var dataTask: URLSessionDataTask?
@@ -40,20 +40,20 @@ class SearchViewController: UIViewController {
         tv.dataSource = self
         tv.backgroundColor = .clear
         tv.estimatedRowHeight = 60
-        tv.register(TrackTableViewCell.self, forCellReuseIdentifier: TrackCellIdentifier)
-        tv.register(ArtistTableViewCell.self, forCellReuseIdentifier: ArtistCellIdentifier)
+        tv.register(TrackTableViewCell.self, forCellReuseIdentifier: self.TrackCellIdentifier)
+        tv.register(ArtistTableViewCell.self, forCellReuseIdentifier: self.ArtistCellIdentifier)
         tv.separatorStyle = .none
         tv.tableHeaderView = self.searchController.searchBar
         return tv
     }()
 
-    override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
     }
 
-    override func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
@@ -80,9 +80,9 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
     
     // DELEGATE METHOD
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.searchController.searchBar.selectedScopeButtonIndex == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: ArtistCellIdentifier, for: indexPath) as! ArtistTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: self.ArtistCellIdentifier, for: indexPath) as! ArtistTableViewCell
             if let artist : Artist = self.searchArtistResults[indexPath.row] {
                 if let name = artist.name, let genre = artist.genre {
                     cell.nameLabel.text = name
@@ -91,7 +91,7 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
             }
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: TrackCellIdentifier, for: indexPath) as! TrackTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: self.TrackCellIdentifier, for: indexPath) as! TrackTableViewCell
             if let track : Track = self.searchTrackResults[indexPath.row] {
                 if let name = track.name, let artist = track.artist {
                     cell.nameLabel.text = name
@@ -181,7 +181,6 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
                                 let artistName = object["artistName"] as? String
                                 let previewURL = object["previewURL"] as? String
                                 self.searchTrackResults.append(Track(name: trackName, artist: artistName, previewUrl: previewURL, imageURL: nil))
-                                print(trackName!, " - ",artistName!)
                             }
                             
                             DispatchQueue.main.async {

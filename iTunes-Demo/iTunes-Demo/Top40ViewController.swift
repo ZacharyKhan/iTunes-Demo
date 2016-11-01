@@ -48,14 +48,14 @@ class Top40ViewController: UIViewController {
         self.view.addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         self.view.addConstraintsWithFormat("V:|[v0]|", views: collectionView)
         
-        let searchButton : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(self.searchHandler))
+        let searchButton : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(self.searchAction))
         
         navigationItem.rightBarButtonItem = searchButton
         loadTop40()
     }
     
-    func searchHandler() {
-        
+    func searchAction() {
+        self.show(SearchViewController(), sender: self)
     }
     
     func loadTop40() {
