@@ -21,6 +21,9 @@
 		D5AD5FC11DC876B7002F3D34 /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC01DC876B7002F3D34 /* TableViewCells.swift */; };
 		D5AD5FC21DC876B7002F3D34 /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC01DC876B7002F3D34 /* TableViewCells.swift */; };
 		D5AD5FC31DC876B7002F3D34 /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC01DC876B7002F3D34 /* TableViewCells.swift */; };
+		D5AD5FC91DC8890C002F3D34 /* Top40ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC81DC8890C002F3D34 /* Top40ViewController.swift */; };
+		D5AD5FCA1DC8890C002F3D34 /* Top40ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC81DC8890C002F3D34 /* Top40ViewController.swift */; };
+		D5AD5FCB1DC8890C002F3D34 /* Top40ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC81DC8890C002F3D34 /* Top40ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,7 @@
 		D5AD5FB91DC85749002F3D34 /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		D5AD5FBB1DC86C27002F3D34 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		D5AD5FC01DC876B7002F3D34 /* TableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCells.swift; sourceTree = "<group>"; };
+		D5AD5FC81DC8890C002F3D34 /* Top40ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Top40ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,7 @@
 		D5ABE4C91DC840F500F72BCD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D5AD5FC81DC8890C002F3D34 /* Top40ViewController.swift */,
 				D5ABE49D1DC83DFC00F72BCD /* SearchViewController.swift */,
 			);
 			name = Controller;
@@ -298,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5AD5FC91DC8890C002F3D34 /* Top40ViewController.swift in Sources */,
 				D5ABE4CB1DC8420B00F72BCD /* Extensions.swift in Sources */,
 				D5AD5FBC1DC86C27002F3D34 /* Track.swift in Sources */,
 				D5ABE49E1DC83DFC00F72BCD /* SearchViewController.swift in Sources */,
@@ -313,6 +319,7 @@
 			files = (
 				D5ABE4B11DC83DFC00F72BCD /* iTunes_DemoTests.swift in Sources */,
 				D5AD5FC21DC876B7002F3D34 /* TableViewCells.swift in Sources */,
+				D5AD5FCA1DC8890C002F3D34 /* Top40ViewController.swift in Sources */,
 				D5AD5FBD1DC86C27002F3D34 /* Track.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,6 +330,7 @@
 			files = (
 				D5ABE4BC1DC83DFC00F72BCD /* iTunes_DemoUITests.swift in Sources */,
 				D5AD5FC31DC876B7002F3D34 /* TableViewCells.swift in Sources */,
+				D5AD5FCB1DC8890C002F3D34 /* Top40ViewController.swift in Sources */,
 				D5AD5FBE1DC86C27002F3D34 /* Track.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
