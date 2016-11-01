@@ -13,7 +13,6 @@ private let ArtistCellIdentifier = "ArtistTableViewCell"
 
 class SearchViewController: UIViewController {
     
-    
     let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
     var dataTask: URLSessionDataTask?
     

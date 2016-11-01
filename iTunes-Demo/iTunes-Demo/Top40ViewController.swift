@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 private let top40CellId = "Top40CellIdentifier"
 
@@ -14,6 +15,7 @@ class Top40ViewController: UIViewController {
     
     let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
     var dataTask: URLSessionDataTask?
+    var player : AVAudioPlayer? = nil
     
     var dataSource : [Track] = []
     
@@ -46,7 +48,14 @@ class Top40ViewController: UIViewController {
         self.view.addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         self.view.addConstraintsWithFormat("V:|[v0]|", views: collectionView)
         
+        let searchButton : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(self.searchHandler))
+        
+        navigationItem.rightBarButtonItem = searchButton
         loadTop40()
+    }
+    
+    func searchHandler() {
+        
     }
     
     func loadTop40() {
@@ -117,6 +126,10 @@ extension Top40ViewController : UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: top40CellId, for: indexPath) as! Top40CollectionViewCell
         cell.imageURL = self.dataSource[indexPath.item].imageURL
+        cell.trackLabel.text = self.dataSource[indexPath.item].name
+        cell.artistLabel.text = self.dataSource[indexPath.item].artist
+        cell.previewURL = self.dataSource[indexPath.item].previewUrl
+        cell.rankLabel.text = "#\(indexPath.item+1)"
         return cell
     }
     
@@ -139,6 +152,22 @@ extension Top40ViewController : UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? Top40CollectionViewCell {
+            
+            do {
+                let fileURL = NSURL(string: cell.previewURL!)
+                let soundData = NSData(contentsOf:fileURL! as URL)
+                self.player = try AVAudioPlayer(data: soundData! as Data)
+                self.player?.prepareToPlay()
+                self.player?.volume = 1.0
+                self.player?.play()
+            } catch {
+                print("Error getting the audio file")
+            }
+        }
     }
     
 }

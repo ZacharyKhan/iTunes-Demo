@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class Top40CollectionViewCell: UICollectionViewCell {
     
@@ -16,16 +17,25 @@ class Top40CollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private let artistLabel : UILabel = {
+    var previewURL : String!
+    
+    let rankLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textColor = .white
         return label
     }()
     
-    private let trackLabel : UILabel = {
+    let artistLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textColor = .white
+        return label
+    }()
+    
+    let trackLabel : UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 19)
         label.textColor = .white
         return label
     }()
@@ -38,15 +48,19 @@ class Top40CollectionViewCell: UICollectionViewCell {
     
     private lazy var overlay : UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        view.backgroundColor = UIColor(white: 0, alpha: 0.35)
         view.alpha = 0
         
+        view.addSubview(self.rankLabel)
+        view.addConstraintsWithFormat("H:|-[v0(65)]", views: self.rankLabel)
+        view.addConstraintsWithFormat("V:|-[v0(50)]", views: self.rankLabel)
+        
         view.addSubview(self.artistLabel)
-        view.addConstraintsWithFormat("H:|[v0]|", views: self.artistLabel)
-        view.addConstraintsWithFormat("V:[v0(30)-|]", views: self.artistLabel)
+        view.addConstraintsWithFormat("H:|-[v0]|", views: self.artistLabel)
+        view.addConstraintsWithFormat("V:[v0(20)]-|", views: self.artistLabel)
         
         view.addSubview(self.trackLabel)
-        view.addConstraintsWithFormat("H:|[v0]|", views: self.trackLabel)
+        view.addConstraintsWithFormat("H:|-[v0]|", views: self.trackLabel)
         view.addConstraintsWithFormat("V:[v0(35)][v1]", views: self.trackLabel, self.artistLabel)
         
         return view
@@ -75,6 +89,9 @@ class Top40CollectionViewCell: UICollectionViewCell {
         imageView.addConstraintsWithFormat("H:|[v0]|", views: overlay)
         imageView.addConstraintsWithFormat("V:|[v0]|", views: overlay)
         
+        UIView.animate(withDuration: 1.5, animations: {
+            self.overlay.alpha = 1
+        }, completion: nil)
     }
     
     private func getImage(for string: String?) {
