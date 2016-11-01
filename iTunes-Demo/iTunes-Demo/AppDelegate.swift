@@ -12,13 +12,20 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    private let navController : UINavigationController = {
+        let nc = UINavigationController(rootViewController: SearchViewController())
+        nc.navigationBar.isTranslucent = false
+        nc.navigationBar.barTintColor = .white
+        nc.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red:0.23, green:0.22, blue:0.21, alpha:1.0)]
+        return nc
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         window = UIWindow()
-        window?.rootViewController = ViewController()
+        window?.rootViewController = navController
         window?.makeKeyAndVisible()
     
         return true

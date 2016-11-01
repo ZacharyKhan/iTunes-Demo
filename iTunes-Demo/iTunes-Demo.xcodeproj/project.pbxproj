@@ -8,19 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		D5ABE49C1DC83DFC00F72BCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ABE49B1DC83DFC00F72BCD /* AppDelegate.swift */; };
-		D5ABE49E1DC83DFC00F72BCD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ABE49D1DC83DFC00F72BCD /* ViewController.swift */; };
+		D5ABE49E1DC83DFC00F72BCD /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ABE49D1DC83DFC00F72BCD /* SearchViewController.swift */; };
 		D5ABE4A31DC83DFC00F72BCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5ABE4A21DC83DFC00F72BCD /* Assets.xcassets */; };
 		D5ABE4A61DC83DFC00F72BCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5ABE4A41DC83DFC00F72BCD /* LaunchScreen.storyboard */; };
 		D5ABE4B11DC83DFC00F72BCD /* iTunes_DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ABE4B01DC83DFC00F72BCD /* iTunes_DemoTests.swift */; };
 		D5ABE4BC1DC83DFC00F72BCD /* iTunes_DemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ABE4BB1DC83DFC00F72BCD /* iTunes_DemoUITests.swift */; };
-		D5ABE4CB1DC8420B00F72BCD /* Entensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ABE4CA1DC8420B00F72BCD /* Entensions.swift */; };
+		D5ABE4CB1DC8420B00F72BCD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ABE4CA1DC8420B00F72BCD /* Extensions.swift */; };
 		D5AD5FBA1DC85749002F3D34 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FB91DC85749002F3D34 /* Artist.swift */; };
 		D5AD5FBC1DC86C27002F3D34 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FBB1DC86C27002F3D34 /* Track.swift */; };
 		D5AD5FBD1DC86C27002F3D34 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FBB1DC86C27002F3D34 /* Track.swift */; };
 		D5AD5FBE1DC86C27002F3D34 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FBB1DC86C27002F3D34 /* Track.swift */; };
-		D5AD5FC11DC876B7002F3D34 /* ArtistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC01DC876B7002F3D34 /* ArtistTableViewCell.swift */; };
-		D5AD5FC21DC876B7002F3D34 /* ArtistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC01DC876B7002F3D34 /* ArtistTableViewCell.swift */; };
-		D5AD5FC31DC876B7002F3D34 /* ArtistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC01DC876B7002F3D34 /* ArtistTableViewCell.swift */; };
+		D5AD5FC11DC876B7002F3D34 /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC01DC876B7002F3D34 /* TableViewCells.swift */; };
+		D5AD5FC21DC876B7002F3D34 /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC01DC876B7002F3D34 /* TableViewCells.swift */; };
+		D5AD5FC31DC876B7002F3D34 /* TableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC01DC876B7002F3D34 /* TableViewCells.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +43,7 @@
 /* Begin PBXFileReference section */
 		D5ABE4981DC83DFC00F72BCD /* iTunes-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iTunes-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5ABE49B1DC83DFC00F72BCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D5ABE49D1DC83DFC00F72BCD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D5ABE49D1DC83DFC00F72BCD /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D5ABE4A21DC83DFC00F72BCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5ABE4A51DC83DFC00F72BCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D5ABE4A71DC83DFC00F72BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,10 +53,10 @@
 		D5ABE4B71DC83DFC00F72BCD /* iTunes-DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iTunes-DemoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5ABE4BB1DC83DFC00F72BCD /* iTunes_DemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunes_DemoUITests.swift; sourceTree = "<group>"; };
 		D5ABE4BD1DC83DFC00F72BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D5ABE4CA1DC8420B00F72BCD /* Entensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entensions.swift; sourceTree = "<group>"; };
+		D5ABE4CA1DC8420B00F72BCD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D5AD5FB91DC85749002F3D34 /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		D5AD5FBB1DC86C27002F3D34 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
-		D5AD5FC01DC876B7002F3D34 /* ArtistTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistTableViewCell.swift; sourceTree = "<group>"; };
+		D5AD5FC01DC876B7002F3D34 /* TableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCells.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				D5ABE49B1DC83DFC00F72BCD /* AppDelegate.swift */,
-				D5ABE4CA1DC8420B00F72BCD /* Entensions.swift */,
+				D5ABE4CA1DC8420B00F72BCD /* Extensions.swift */,
 				D5AD5FB81DC85728002F3D34 /* Data Object */,
 				D5ABE4C91DC840F500F72BCD /* Controller */,
 				D5AD5FBF1DC8768D002F3D34 /* Cell */,
@@ -140,7 +140,7 @@
 		D5ABE4C91DC840F500F72BCD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D5ABE49D1DC83DFC00F72BCD /* ViewController.swift */,
+				D5ABE49D1DC83DFC00F72BCD /* SearchViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -157,7 +157,7 @@
 		D5AD5FBF1DC8768D002F3D34 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				D5AD5FC01DC876B7002F3D34 /* ArtistTableViewCell.swift */,
+				D5AD5FC01DC876B7002F3D34 /* TableViewCells.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -298,11 +298,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5ABE4CB1DC8420B00F72BCD /* Entensions.swift in Sources */,
+				D5ABE4CB1DC8420B00F72BCD /* Extensions.swift in Sources */,
 				D5AD5FBC1DC86C27002F3D34 /* Track.swift in Sources */,
-				D5ABE49E1DC83DFC00F72BCD /* ViewController.swift in Sources */,
+				D5ABE49E1DC83DFC00F72BCD /* SearchViewController.swift in Sources */,
 				D5ABE49C1DC83DFC00F72BCD /* AppDelegate.swift in Sources */,
-				D5AD5FC11DC876B7002F3D34 /* ArtistTableViewCell.swift in Sources */,
+				D5AD5FC11DC876B7002F3D34 /* TableViewCells.swift in Sources */,
 				D5AD5FBA1DC85749002F3D34 /* Artist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,7 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5ABE4B11DC83DFC00F72BCD /* iTunes_DemoTests.swift in Sources */,
-				D5AD5FC21DC876B7002F3D34 /* ArtistTableViewCell.swift in Sources */,
+				D5AD5FC21DC876B7002F3D34 /* TableViewCells.swift in Sources */,
 				D5AD5FBD1DC86C27002F3D34 /* Track.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,7 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5ABE4BC1DC83DFC00F72BCD /* iTunes_DemoUITests.swift in Sources */,
-				D5AD5FC31DC876B7002F3D34 /* ArtistTableViewCell.swift in Sources */,
+				D5AD5FC31DC876B7002F3D34 /* TableViewCells.swift in Sources */,
 				D5AD5FBE1DC86C27002F3D34 /* Track.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

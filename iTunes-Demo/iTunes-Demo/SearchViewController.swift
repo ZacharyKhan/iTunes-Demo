@@ -8,9 +8,10 @@
 
 import UIKit
 
-private let cellIdentifier = "CellIdentifier"
+private let TrackCellIdentifier = "TrackTableViewCell"
+private let ArtistCellIdentifier = "ArtistTableViewCell"
 
-class ViewController: UIViewController {
+class SearchViewController: UIViewController {
     
     
     let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
@@ -28,6 +29,8 @@ class ViewController: UIViewController {
         controller.searchBar.placeholder = "Search Artist"
         controller.searchBar.delegate = self
         controller.searchBar.sizeToFit()
+        controller.hidesNavigationBarDuringPresentation = false
+        controller.definesPresentationContext = false
         controller.searchBar.scopeButtonTitles = ["Artist", "Song"]
         return controller
     }()
@@ -37,7 +40,9 @@ class ViewController: UIViewController {
         tv.delegate = self
         tv.dataSource = self
         tv.backgroundColor = .clear
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tv.estimatedRowHeight = 60
+        tv.register(TrackTableViewCell.self, forCellReuseIdentifier: TrackCellIdentifier)
+        tv.register(ArtistTableViewCell.self, forCellReuseIdentifier: ArtistCellIdentifier)
         tv.separatorStyle = .none
         tv.tableHeaderView = self.searchController.searchBar
         return tv
@@ -57,16 +62,18 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController : UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
+extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
     
     // Setup view
     
     func setupView() {
-        self.view.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
+        
+        self.view.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
+        self.title = "iTunes"
         
         self.view.addSubview(self.tableView)
         self.view.addConstraintsWithFormat("H:|[v0]|", views: tableView)
-        self.view.addConstraintsWithFormat("V:|-20-[v0]|", views: tableView)
+        self.view.addConstraintsWithFormat("V:|[v0]|", views: tableView)
     }
     
     // COLLECTION VIEW
@@ -75,24 +82,25 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource, UISearchB
     // DELEGATE METHOD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        cell.backgroundColor = .white
-        
         if self.searchController.searchBar.selectedScopeButtonIndex == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: ArtistCellIdentifier, for: indexPath) as! ArtistTableViewCell
             if let artist : Artist = self.searchArtistResults[indexPath.row] {
                 if let name = artist.name, let genre = artist.genre {
-                    cell.textLabel?.text = "\(name) - \(genre)"
+                    cell.nameLabel.text = name
+                    cell.genreLabel.text = genre
                 }
             }
+            return cell
         } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: TrackCellIdentifier, for: indexPath) as! TrackTableViewCell
             if let track : Track = self.searchTrackResults[indexPath.row] {
                 if let name = track.name, let artist = track.artist {
-                    cell.textLabel?.text = "\(artist) - \(name)"
+                    cell.nameLabel.text = name
+                    cell.artistLabel.text = artist
                 }
             }
+            return cell
         }
-        
-        return cell
     }
     
     // DATASOURCE
@@ -108,6 +116,10 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource, UISearchB
             return self.searchTrackResults.count
         }
         
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
     
     // SEARCH RESULTS UPDATING
@@ -193,12 +205,15 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource, UISearchB
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         
-        
         if selectedScope == 0 {
             searchBar.placeholder = "Search Artist"
+            self.searchArtistResults.removeAll()
         } else {
             searchBar.placeholder = "Search Song"
+            self.searchTrackResults.removeAll()
         }
+        
+        tableView.reloadData()
         
         if let url : NSURL = NSURL(string: "https://itunes.apple.com/search?media=music&entity=\(entityArray[selectedScope])&term=\(searchBar.text!)&limit=15"), !(searchBar.text?.isEmpty)! {
             
