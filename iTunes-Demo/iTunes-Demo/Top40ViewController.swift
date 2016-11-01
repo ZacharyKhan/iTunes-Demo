@@ -116,7 +116,7 @@ extension Top40ViewController : UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: top40CellId, for: indexPath) as! Top40CollectionViewCell
-        
+        cell.imageURL = self.dataSource[indexPath.item].imageURL
         return cell
     }
     
@@ -129,7 +129,7 @@ extension Top40ViewController : UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = CGSize(width: (collectionView.bounds.width/3)-3, height: (collectionView.bounds.height/3))
+        let size = CGSize(width: (collectionView.bounds.width/2)-3, height: (collectionView.bounds.height/3))
         return size
     }
     
