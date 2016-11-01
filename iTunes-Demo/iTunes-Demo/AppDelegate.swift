@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     private let navController : UINavigationController = {
-        let nc = UINavigationController(rootViewController: SearchViewController())
+        let nc = UINavigationController(rootViewController: Top40ViewController())
         nc.navigationBar.isTranslucent = false
         nc.navigationBar.barTintColor = .white
         nc.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red:0.23, green:0.22, blue:0.21, alpha:1.0)]

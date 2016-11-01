@@ -24,6 +24,9 @@
 		D5AD5FC91DC8890C002F3D34 /* Top40ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC81DC8890C002F3D34 /* Top40ViewController.swift */; };
 		D5AD5FCA1DC8890C002F3D34 /* Top40ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC81DC8890C002F3D34 /* Top40ViewController.swift */; };
 		D5AD5FCB1DC8890C002F3D34 /* Top40ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FC81DC8890C002F3D34 /* Top40ViewController.swift */; };
+		D5AD5FCD1DC88D27002F3D34 /* CollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FCC1DC88D27002F3D34 /* CollectionViewCells.swift */; };
+		D5AD5FCE1DC88D27002F3D34 /* CollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FCC1DC88D27002F3D34 /* CollectionViewCells.swift */; };
+		D5AD5FCF1DC88D27002F3D34 /* CollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AD5FCC1DC88D27002F3D34 /* CollectionViewCells.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,7 @@
 		D5AD5FBB1DC86C27002F3D34 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		D5AD5FC01DC876B7002F3D34 /* TableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCells.swift; sourceTree = "<group>"; };
 		D5AD5FC81DC8890C002F3D34 /* Top40ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Top40ViewController.swift; sourceTree = "<group>"; };
+		D5AD5FCC1DC88D27002F3D34 /* CollectionViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCells.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				D5AD5FC01DC876B7002F3D34 /* TableViewCells.swift */,
+				D5AD5FCC1DC88D27002F3D34 /* CollectionViewCells.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -309,6 +314,7 @@
 				D5ABE49E1DC83DFC00F72BCD /* SearchViewController.swift in Sources */,
 				D5ABE49C1DC83DFC00F72BCD /* AppDelegate.swift in Sources */,
 				D5AD5FC11DC876B7002F3D34 /* TableViewCells.swift in Sources */,
+				D5AD5FCD1DC88D27002F3D34 /* CollectionViewCells.swift in Sources */,
 				D5AD5FBA1DC85749002F3D34 /* Artist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5AD5FCE1DC88D27002F3D34 /* CollectionViewCells.swift in Sources */,
 				D5ABE4B11DC83DFC00F72BCD /* iTunes_DemoTests.swift in Sources */,
 				D5AD5FC21DC876B7002F3D34 /* TableViewCells.swift in Sources */,
 				D5AD5FCA1DC8890C002F3D34 /* Top40ViewController.swift in Sources */,
@@ -328,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5AD5FCF1DC88D27002F3D34 /* CollectionViewCells.swift in Sources */,
 				D5ABE4BC1DC83DFC00F72BCD /* iTunes_DemoUITests.swift in Sources */,
 				D5AD5FC31DC876B7002F3D34 /* TableViewCells.swift in Sources */,
 				D5AD5FCB1DC8890C002F3D34 /* Top40ViewController.swift in Sources */,

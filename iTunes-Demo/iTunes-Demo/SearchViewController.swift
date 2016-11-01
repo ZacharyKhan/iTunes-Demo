@@ -181,7 +181,7 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
                                 let trackName = object["trackName"] as? String
                                 let artistName = object["artistName"] as? String
                                 let previewURL = object["previewURL"] as? String
-                                self.searchTrackResults.append(Track(name: trackName, artist: artistName, previewUrl: previewURL))
+                                self.searchTrackResults.append(Track(name: trackName, artist: artistName, previewUrl: previewURL, imageURL: nil))
                                 print(trackName!, " - ",artistName!)
                             }
                             
