@@ -43,7 +43,6 @@ class Top40ViewController: UIViewController {
     func setupView() {
         self.view.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
         self.title = "Top 40"
-        self.tabBarItem = UITabBarItem(title: "Top 40", image: #imageLiteral(resourceName: "top_40_icon"), tag: 0)
         
         self.view.addSubview(collectionView)
         self.view.addConstraintsWithFormat("H:|[v0]|", views: collectionView)
@@ -98,15 +97,14 @@ class Top40ViewController: UIViewController {
                                         if let track : Track = Track(name: nameLabel, artist: artistLabel, genre: genreLabel, time: nil, previewUrl: previewURL, imageURL: url) {
                                             
                                             self.dataSource.append(track)
-                                            DispatchQueue.main.async {
-                                                self.collectionView.reloadData()
-                                            }
                                         }
                                     }
                                 }
                             }
                         }
-                        
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                        }
                     }
                 } else {
                     print("Results key not found in dictionary")

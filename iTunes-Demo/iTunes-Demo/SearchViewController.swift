@@ -70,7 +70,6 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
         self.view.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         self.title = "Search"
         
-        self.tabBarItem = UITabBarItem(title: "Search", image: #imageLiteral(resourceName: "search_icon"), tag: 0)
         
         self.view.addSubview(self.tableView)
         self.view.addConstraintsWithFormat("H:|[v0]|", views: tableView)
@@ -181,7 +180,6 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
                                 if let name = object["artistName"] as? String, let genre = object["primaryGenreName"] as? String {
                                     self.searchArtistResults.append(Artist(name: name, genre: genre))
                                 }
-
                             } else {
                                 let trackName = object["trackName"] as? String
                                 let artistName = object["artistName"] as? String
