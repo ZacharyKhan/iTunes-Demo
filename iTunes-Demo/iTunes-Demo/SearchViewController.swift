@@ -68,7 +68,9 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
     func setupView() {
         
         self.view.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
-        self.title = "iTunes"
+        self.title = "Search"
+        
+        self.tabBarItem = UITabBarItem(title: "Search", image: #imageLiteral(resourceName: "search_icon"), tag: 0)
         
         self.view.addSubview(self.tableView)
         self.view.addConstraintsWithFormat("H:|[v0]|", views: tableView)
@@ -93,9 +95,10 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: self.TrackCellIdentifier, for: indexPath) as! TrackTableViewCell
             if let track : Track = self.searchTrackResults[indexPath.row] {
-                if let name = track.name, let artist = track.artist {
+                if let name = track.name, let artist = track.artist, let imageURL = track.imageURL {
                     cell.nameLabel.text = name
                     cell.artistLabel.text = artist
+                    cell.imageURL = imageURL
                 }
             }
             return cell
@@ -156,31 +159,37 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
     
     func updateSearchResults(data: Data?, selectedScopeIndex: Int?) {
 
-        if selectedScopeIndex == 0 {
             self.searchArtistResults.removeAll()
-        } else {
             self.searchTrackResults.removeAll()
-        }
         
         do {
             if let data = data, let response = try JSONSerialization.jsonObject(with: data as Data, options:JSONSerialization.ReadingOptions(rawValue:0)) as? [String: AnyObject] {
                 
                 // Get the results array
                 if let array: AnyObject = response["results"] {
+                    
+                    //each result is a dictionary
                     for dictionary in array as! [AnyObject] {
+                        
+                        // objects are nested dictionaries
                         if let object = dictionary as? [String: AnyObject] {
+                            
+                            
                             // Parse the search result
-                            //let name = trackDictonary["trackName"] as? String
                             
                             if selectedScopeIndex == 0 {
-                                let name = object["artistName"] as? String
-                                let genre = object["primaryGenreName"] as? String
-                                self.searchArtistResults.append(Artist(name: name, genre: genre))
+                                if let name = object["artistName"] as? String, let genre = object["primaryGenreName"] as? String {
+                                    self.searchArtistResults.append(Artist(name: name, genre: genre))
+                                }
+
                             } else {
                                 let trackName = object["trackName"] as? String
                                 let artistName = object["artistName"] as? String
                                 let previewURL = object["previewURL"] as? String
-                                self.searchTrackResults.append(Track(name: trackName, artist: artistName, previewUrl: previewURL, imageURL: nil))
+                                let primaryGenre = object["primaryGenreName"] as? String
+                                let timeInMilli = object["timeInMillis"] as? Double
+                                let imageURL = object["artworkUrl60"] as? String
+                                self.searchTrackResults.append(Track(name: trackName, artist: artistName, genre: primaryGenre, time: timeInMilli, previewUrl: previewURL, imageURL: imageURL))
                             }
                             
                             DispatchQueue.main.async {
@@ -214,7 +223,6 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
         tableView.reloadData()
         
         if let url : NSURL = NSURL(string: "https://itunes.apple.com/search?media=music&entity=\(entityArray[selectedScope])&term=\(searchBar.text!)&limit=15"), !(searchBar.text?.isEmpty)! {
-            
             findData(with: url as URL, selectedScopeIndex: selectedScope)
         }
     }

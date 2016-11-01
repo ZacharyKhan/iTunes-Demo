@@ -20,16 +20,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nc.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red:0.23, green:0.22, blue:0.21, alpha:1.0)]
         return nc
     }()
+    
+    private let navController2 : UINavigationController = {
+        let nc = UINavigationController(rootViewController: SearchViewController())
+        nc.navigationBar.isTranslucent = false
+        nc.navigationBar.barTintColor = .white
+        nc.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor(red:0.23, green:0.22, blue:0.21, alpha:1.0)]
+        return nc
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-//        let tabBarController = UITabBarController()
-//        let controllers = [navController1,navController2]
-//        tabBarController.viewControllers = controllers
+        let tabBarController = UITabBarController()
+        let controllers = [navController1,navController2]
+        tabBarController.viewControllers = controllers
         
         window = UIWindow()
-        window?.rootViewController = navController1
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     
         return true

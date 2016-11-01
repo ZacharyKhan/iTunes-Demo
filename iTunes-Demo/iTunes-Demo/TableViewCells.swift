@@ -10,6 +10,7 @@ import UIKit
 
 class ArtistTableViewCell: UITableViewCell {
     
+    
     lazy var nameLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -54,6 +55,18 @@ class ArtistTableViewCell: UITableViewCell {
 
 class TrackTableViewCell: UITableViewCell {
     
+    var imageURL : String? {
+        didSet {
+            self.getImage(for: imageURL)
+        }
+    }
+    
+    let artworkImageView : UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        return iv
+    }()
+    
     lazy var nameLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -73,14 +86,23 @@ class TrackTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.addSubview(artworkImageView)
+        self.addConstraintsWithFormat("H:|-8-[v0(50)]", views: artworkImageView)
+        
+        let height = NSLayoutConstraint(item: artworkImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50)
+        let centerY = NSLayoutConstraint(item: artworkImageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0)
+        self.addConstraints([height, centerY])
+        NSLayoutConstraint.activate([height, centerY])
+        
         self.addSubview(nameLabel)
-        self.addConstraintsWithFormat("H:|-[v0]|", views: nameLabel)
+        self.addConstraintsWithFormat("H:|[v1]-[v0]|", views: nameLabel, artworkImageView)
         self.addConstraintsWithFormat("V:|[v0]-25-|", views: nameLabel)
         
         self.addSubview(artistLabel)
-        self.addConstraintsWithFormat("H:|-[v0]|", views: artistLabel)
+        self.addConstraintsWithFormat("H:|[v1]-[v0]|", views: artistLabel, artworkImageView)
         self.addConstraintsWithFormat("V:[v1][v0]-5-|", views: artistLabel, nameLabel)
         
+
         self.backgroundColor = .white
     }
     
@@ -91,6 +113,19 @@ class TrackTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
+    }
+    
+    private func getImage(for string: String?) {
+        let url = URL(string: string!)
+        
+        DispatchQueue.global().async {
+            if let data = try? Data(contentsOf: url!) {
+                DispatchQueue.main.async {
+                    self.artworkImageView.image = UIImage(data: data)
+                }
+            }
+        }
         
     }
     

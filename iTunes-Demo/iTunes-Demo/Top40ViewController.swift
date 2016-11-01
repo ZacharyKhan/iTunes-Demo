@@ -42,21 +42,17 @@ class Top40ViewController: UIViewController {
     
     func setupView() {
         self.view.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
-        self.title = "Top 40 Songs"
+        self.title = "Top 40"
+        self.tabBarItem = UITabBarItem(title: "Top 40", image: #imageLiteral(resourceName: "top_40_icon"), tag: 0)
         
         self.view.addSubview(collectionView)
         self.view.addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         self.view.addConstraintsWithFormat("V:|[v0]|", views: collectionView)
         
-        let searchButton : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(self.searchAction))
-        
-        navigationItem.rightBarButtonItem = searchButton
         loadTop40()
     }
     
-    func searchAction() {
-        self.show(SearchViewController(), sender: self)
-    }
+
     
     func loadTop40() {
         if let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/explicit=true/json") {
@@ -92,10 +88,15 @@ class Top40ViewController: UIViewController {
                 if let object: AnyObject = response["feed"] {
                     if let entry : [AnyObject] = object["entry"] as? [AnyObject] {
                         for dictionary in entry {
-                            if let name = dictionary["im:name"] as? NSDictionary, let artist = dictionary["im:artist"] as? NSDictionary, let preview = dictionary["link"] as? NSArray, let imageURLArray = dictionary["im:image"] as? NSArray {
-                                if let attributes = (preview.lastObject! as? NSDictionary)?["attributes"] as? NSDictionary, let url = (imageURLArray.lastObject! as? NSDictionary)?["label"] as? String, let nameLabel = name["label"] as? String, let artistLabel = artist["label"] as? String {
-                                    if let previewURL = attributes["href"] as? String {
-                                        if let track : Track = Track(name: nameLabel, artist: artistLabel, previewUrl: previewURL, imageURL: url) {
+                            print(dictionary)
+                            if let name = dictionary["im:name"] as? NSDictionary, let artist = dictionary["im:artist"] as? NSDictionary, let preview = dictionary["link"] as? NSArray, let imageURLArray = dictionary["im:image"] as? NSArray, let category = dictionary["category"] as? NSDictionary {
+                                
+                                if let attributes = (preview.lastObject! as? NSDictionary)?["attributes"] as? NSDictionary, let url = (imageURLArray.lastObject! as? NSDictionary)?["label"] as? String, let nameLabel = name["label"] as? String, let artistLabel = artist["label"] as? String, let genreAttributes = category["attributes"] as? NSDictionary {
+                                    
+                                    if let previewURL = attributes["href"] as? String, let genreLabel = genreAttributes["label"] as? String {
+                                        
+                                        if let track : Track = Track(name: nameLabel, artist: artistLabel, genre: genreLabel, time: nil, previewUrl: previewURL, imageURL: url) {
+                                            
                                             self.dataSource.append(track)
                                             DispatchQueue.main.async {
                                                 self.collectionView.reloadData()

@@ -11,11 +11,15 @@ class Track {
     var artist: String?
     var previewUrl: String?
     var imageURL: String?
+    var genre : String?
+    var time : Double?
   
-    init(name: String?, artist: String?, previewUrl: String?, imageURL : String?) {
+    init(name: String?, artist: String?, genre: String?, time: Double?, previewUrl: String?, imageURL : String?) {
         self.name = name
         self.artist = artist
         self.previewUrl = previewUrl
         self.imageURL = imageURL
+        self.genre = genre
+        self.time = time
     }
 }
