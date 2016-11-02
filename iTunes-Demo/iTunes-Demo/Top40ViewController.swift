@@ -55,7 +55,7 @@ class Top40ViewController: UIViewController {
         self.view.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
         self.title = "Top 40 Songs"
         
-        menu = SideMenu(frame: CGRect(x: -(self.view.bounds.width/2), y: 64, width: self.view.bounds.width/2, height: self.view.bounds.height-64))
+        menu = SideMenu(frame: CGRect(x: -(self.view.bounds.width/2), y: 0, width: self.view.bounds.width/2, height: self.view.bounds.height-64))
         menu?.delegate = self
         
         self.view.addSubview(collectionView)
