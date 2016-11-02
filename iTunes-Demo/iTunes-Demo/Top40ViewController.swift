@@ -40,6 +40,10 @@ class Top40ViewController: UIViewController {
         if self.player != nil {
             self.player?.stop()
         }
+        
+        if self.menu != nil, (self.menu?.isShown)! {
+            self.menu?.hide()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,7 +53,7 @@ class Top40ViewController: UIViewController {
     
     func setupView() {
         self.view.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
-        self.title = "Top 40"
+        self.title = "Top 40 Songs"
         
         menu = SideMenu(frame: CGRect(x: -(self.view.bounds.width/2), y: 64, width: self.view.bounds.width/2, height: self.view.bounds.height-64))
         menu?.delegate = self
@@ -237,7 +241,11 @@ extension Top40ViewController : UICollectionViewDelegate, UICollectionViewDataSo
 extension Top40ViewController : SideMenuDelegate {
     
     func didSelectItem(at index: Int, withTitle: String) {
-        self.title = "Top \(withTitle) Songs"
+        if index == 0 {
+            self.title = "Top 40 Songs"
+        } else {
+            self.title = "Top \(withTitle) Songs"
+        }
         self.loadTop40(indexGenre: index)
         self.collectionView.scrollToItem(at: NSIndexPath(item: 0, section: 0) as IndexPath, at: .top, animated: true)
     }

@@ -57,6 +57,8 @@ class Top40DetailViewController: UIViewController {
         if self.player != nil, (self.player?.isPlaying)! {
             self.player?.stop()
         }
+        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -78,6 +80,10 @@ class Top40DetailViewController: UIViewController {
     }
     
     func playPreview(fileURL : URL?) {
+        
+        if self.player != nil, (self.player?.isPlaying)! {
+            self.player?.stop()
+        }
         
         do {
             
