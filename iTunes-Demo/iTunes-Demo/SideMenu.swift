@@ -12,7 +12,7 @@ class SideMenu: UIView {
     
     var delegate : SideMenuDelegate?
     let genreArray = ["All", "Electronic", "Country", "Hip-Hop/Rap", "Jazz", "Pop", "Rock", "Soul", "Reggae", "Dance", "Alternative"]
-    var isShown : Bool?
+    var isShown : Bool? = false
     private var currentWindow : UIWindow?
 
     private lazy var collectionView : UICollectionView = {
