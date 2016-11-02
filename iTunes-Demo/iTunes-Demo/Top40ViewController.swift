@@ -16,7 +16,7 @@ class Top40ViewController: UIViewController {
     let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
     var dataTask: URLSessionDataTask?
     var player : AVAudioPlayer? = nil
-    
+    var menu : SideMenu?
     var dataSource : [Track] = []
     
     lazy var collectionView : UICollectionView = {
@@ -51,14 +51,20 @@ class Top40ViewController: UIViewController {
         self.view.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
         self.title = "Top 40"
         
+        menu = SideMenu(frame: CGRect(x: -(self.view.bounds.width/2), y: 0, width: self.view.bounds.width/2, height: self.view.bounds.height))
+        
         self.view.addSubview(collectionView)
         self.view.addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         self.view.addConstraintsWithFormat("V:|[v0]|", views: collectionView)
         
+        let button = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(self.menu?.show))
+        self.navigationItem.rightBarButtonItem = button
         loadTop40()
     }
     
-
+    func loadtop40(ofGenre: Int?) {
+        //
+    }
     
     func loadTop40() {
         if let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/explicit=true/json") {
@@ -111,6 +117,7 @@ class Top40ViewController: UIViewController {
                         }
                         DispatchQueue.main.async {
                             self.collectionView.reloadData()
+                            self.menu?.show()
                         }
                     }
                 } else {
