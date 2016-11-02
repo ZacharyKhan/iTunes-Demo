@@ -65,6 +65,7 @@ class TrackTableViewCell: UITableViewCell {
     let artworkImageView : UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
+        
         return iv
     }()
     
@@ -73,6 +74,7 @@ class TrackTableViewCell: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
@@ -88,12 +90,9 @@ class TrackTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.addSubview(artworkImageView)
-        self.addConstraintsWithFormat("H:|-8-[v0(50)]", views: artworkImageView)
+        self.addConstraintsWithFormat("H:|[v0(60)]", views: artworkImageView)
+        self.addConstraintsWithFormat("V:|[v0]|", views: artworkImageView)
         
-        let height = NSLayoutConstraint(item: artworkImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50)
-        let centerY = NSLayoutConstraint(item: artworkImageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0)
-        self.addConstraints([height, centerY])
-        NSLayoutConstraint.activate([height, centerY])
         
         self.addSubview(nameLabel)
         self.addConstraintsWithFormat("H:|[v1]-[v0]|", views: nameLabel, artworkImageView)

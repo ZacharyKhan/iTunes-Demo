@@ -160,7 +160,7 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
     
     func updateSearchResults(for searchController: UISearchController) {
         
-        if !searchController.searchBar.text!.isEmpty, (searchController.searchBar.text?.characters.count)! >= 3 {
+        if !searchController.searchBar.text!.isEmpty, (searchController.searchBar.text?.characters.count)! >= 1 {
             
             let searchTerm = searchController.searchBar.text!
             
@@ -190,25 +190,20 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
     }
     
     func updateSearchResults(data: Data?, selectedScopeIndex: Int?) {
-
-            self.searchArtistResults.removeAll()
-            self.searchTrackResults.removeAll()
         
-        print(data!)
+        self.searchArtistResults.removeAll()
+        self.searchTrackResults.removeAll()
         
         do {
             if let data = data, let response = try JSONSerialization.jsonObject(with: data as Data, options:JSONSerialization.ReadingOptions(rawValue:0)) as? [String: AnyObject] {
-                print(data)
-                
                 // Get the results array
                 if let array: AnyObject = response["results"] {
-                    print(array)
+                    
                     //each result is a dictionary
                     for dictionary in array as! [AnyObject] {
-                        print(dictionary)
+
                         // objects are nested dictionaries
                         if let object = dictionary as? [String: AnyObject] {
-                            
                             
                             // Parse the search result
                             
@@ -219,10 +214,10 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
                             } else {
                                 let trackName = object["trackName"] as? String
                                 let artistName = object["artistName"] as? String
-                                let previewURL = object["previewURL"] as? String
+                                let previewURL = object["previewUrl"] as? String
                                 let primaryGenre = object["primaryGenreName"] as? String
                                 let timeInMilli = object["timeInMillis"] as? Double
-                                let imageURL = object["artworkUrl60"] as? String
+                                let imageURL = object["artworkUrl100"] as? String
                                 self.searchTrackResults.append(Track(name: trackName, artist: artistName, genre: primaryGenre, time: timeInMilli, previewUrl: previewURL, imageURL: imageURL))
                             }
                             
@@ -253,8 +248,7 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
             searchBar.placeholder = "Search Song"
             self.searchTrackResults.removeAll()
         }
-        
-        tableView.reloadData()
+
         
         if let url : NSURL = NSURL(string: "https://itunes.apple.com/search?media=music&entity=\(entityArray[selectedScope])&term=\(searchBar.text!)&limit=15"), !(searchBar.text?.isEmpty)! {
             findData(with: url as URL, selectedScopeIndex: selectedScope)
