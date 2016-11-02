@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class Top40CollectionViewCell: UICollectionViewCell {
+class TrackCollectionViewCell: UICollectionViewCell {
     
     var imageURL : String? {
         didSet {
@@ -19,21 +19,21 @@ class Top40CollectionViewCell: UICollectionViewCell {
     
     var previewURL : String!
     
-    let rankLabel : UILabel = {
+    var rankLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textColor = .white
         return label
     }()
     
-    let artistLabel : UILabel = {
+    var artistLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textColor = .white
         return label
     }()
     
-    let trackLabel : UILabel = {
+    var trackLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 19)
         label.textColor = .white
@@ -107,3 +107,4 @@ class Top40CollectionViewCell: UICollectionViewCell {
 
     }
 }
+

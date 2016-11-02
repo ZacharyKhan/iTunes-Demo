@@ -153,6 +153,11 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
                 print("Error getting the audio file")
             }
             
+        } else {
+            let vc = Top40DetailViewController()
+            vc.title = self.searchArtistResults[indexPath.row].name
+            vc.artistName = self.searchArtistResults[indexPath.row].name
+            self.show(vc, sender: self)
         }
     }
     
@@ -216,7 +221,7 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
                                 let artistName = object["artistName"] as? String
                                 let previewURL = object["previewUrl"] as? String
                                 let primaryGenre = object["primaryGenreName"] as? String
-                                let timeInMilli = object["timeInMillis"] as? Double
+                                let timeInMilli = object["timeInMillis"] as? Int
                                 let imageURL = object["artworkUrl100"] as? String
                                 self.searchTrackResults.append(Track(name: trackName, artist: artistName, genre: primaryGenre, time: timeInMilli, previewUrl: previewURL, imageURL: imageURL))
                             }

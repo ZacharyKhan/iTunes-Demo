@@ -21,7 +21,7 @@ class Top40ViewController: UIViewController {
     
     lazy var collectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.register(Top40CollectionViewCell.self, forCellWithReuseIdentifier: top40CellId)
+        collectionView.register(TrackCollectionViewCell.self, forCellWithReuseIdentifier: top40CellId)
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -130,7 +130,7 @@ class Top40ViewController: UIViewController {
 extension Top40ViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: top40CellId, for: indexPath) as! Top40CollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: top40CellId, for: indexPath) as! TrackCollectionViewCell
         cell.imageURL = self.dataSource[indexPath.item].imageURL
         cell.trackLabel.text = self.dataSource[indexPath.item].name
         cell.artistLabel.text = self.dataSource[indexPath.item].artist
@@ -161,22 +161,19 @@ extension Top40ViewController : UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? Top40CollectionViewCell {
+        if let cell = collectionView.cellForItem(at: indexPath) as? TrackCollectionViewCell {
             
             if self.player != nil {
                 self.player?.stop()
             }
             
-            do {
-                let fileURL = NSURL(string: cell.previewURL!)
-                let soundData = NSData(contentsOf: fileURL! as URL)
-                self.player = try AVAudioPlayer(data: soundData! as Data)
-                self.player?.prepareToPlay()
-                self.player?.volume = 1.0
-                self.player?.play()
-            } catch {
-                print("Error getting the audio file")
-            }
+            let vc = Top40DetailViewController()
+            vc.title = cell.artistLabel.text
+            
+            let fileURL = NSURL(string: cell.previewURL!) as! URL
+            vc.fileURL = fileURL
+            vc.artistName = cell.artistLabel.text?.replacingOccurrences(of: " ", with: "")
+            self.show(vc, sender: self)
         }
     }
     

@@ -12,9 +12,9 @@ class Track {
     var previewUrl: String?
     var imageURL: String?
     var genre : String?
-    var time : Double?
+    var time : Int?
   
-    init(name: String?, artist: String?, genre: String?, time: Double?, previewUrl: String?, imageURL : String?) {
+    init(name: String?, artist: String?, genre: String?, time: Int?, previewUrl: String?, imageURL : String?) {
         self.name = name
         self.artist = artist
         self.previewUrl = previewUrl
