@@ -51,24 +51,71 @@ class Top40ViewController: UIViewController {
         self.view.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
         self.title = "Top 40"
         
-        menu = SideMenu(frame: CGRect(x: -(self.view.bounds.width/2), y: 0, width: self.view.bounds.width/2, height: self.view.bounds.height))
+        menu = SideMenu(frame: CGRect(x: -(self.view.bounds.width/2), y: 64, width: self.view.bounds.width/2, height: self.view.bounds.height-64))
+        menu?.delegate = self
         
         self.view.addSubview(collectionView)
         self.view.addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         self.view.addConstraintsWithFormat("V:|[v0]|", views: collectionView)
         
-        let button = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(self.menu?.show))
+        let button = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(self.buttonHandler))
         self.navigationItem.rightBarButtonItem = button
-        loadTop40()
+        loadTop40(indexGenre: nil)
     }
     
-    func loadtop40(ofGenre: Int?) {
-        //
+    func buttonHandler() {
+        self.menu?.show()
     }
-    
-    func loadTop40() {
-        if let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/explicit=true/json") {
+
+    func loadTop40(indexGenre: Int?) {
+        if indexGenre == nil, let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/explicit=true/json") {
             findData(with: url as URL)
+        } else if indexGenre != nil {
+            if indexGenre == 0 {
+                if let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/explicit=true/json") {
+                    findData(with: url as URL)
+                }
+            } else if indexGenre == 1 {
+                if let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/genre=7/json") {
+                    findData(with: url as URL)
+                }
+            } else if indexGenre == 2 {
+                if let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/genre=6/json") {
+                    findData(with: url as URL)
+                }
+            } else if indexGenre == 3 {
+                if let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/genre=18/json") {
+                    findData(with: url as URL)
+                }
+            } else if indexGenre == 4 {
+                if let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/genre=11/json") {
+                    findData(with: url as URL)
+                }
+            } else if indexGenre == 5 {
+                if let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/genre=14/json") {
+                    findData(with: url as URL)
+                }
+            } else if indexGenre == 6 {
+                if let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/genre=21/json") {
+                    findData(with: url as URL)
+                }
+            } else if indexGenre == 7 {
+                if let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/genre=15/json") {
+                    findData(with: url as URL)
+                }
+            } else if indexGenre == 8 {
+                if let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/genre=24/json") {
+                    findData(with: url as URL)
+                }
+            } else if indexGenre == 9 {
+                if let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/genre=17/json") {
+                    findData(with: url as URL)
+                }
+            } else {
+                if let url : NSURL = NSURL(string: "https://itunes.apple.com/us/rss/topsongs/limit=40/genre=20/json") {
+                    findData(with: url as URL)
+                }
+            }
         }
     }
     
@@ -92,6 +139,8 @@ class Top40ViewController: UIViewController {
     }
     
     func updateSearchResults(data: Data?) {
+        
+        self.dataSource.removeAll()
         
         do {
             if let data = data, let response = try JSONSerialization.jsonObject(with: data as Data, options:JSONSerialization.ReadingOptions(rawValue:0)) as? [String: AnyObject] {
@@ -117,7 +166,6 @@ class Top40ViewController: UIViewController {
                         }
                         DispatchQueue.main.async {
                             self.collectionView.reloadData()
-                            self.menu?.show()
                         }
                     }
                 } else {
@@ -184,4 +232,13 @@ extension Top40ViewController : UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
+}
+
+extension Top40ViewController : SideMenuDelegate {
+    
+    func didSelectItem(at index: Int, withTitle: String) {
+        self.title = "Top \(withTitle) Songs"
+        self.loadTop40(indexGenre: index)
+        self.collectionView.scrollToItem(at: NSIndexPath(item: 0, section: 0) as IndexPath, at: .top, animated: true)
+    }
 }

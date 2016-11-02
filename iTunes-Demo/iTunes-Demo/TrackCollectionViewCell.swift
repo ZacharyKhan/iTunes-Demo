@@ -35,7 +35,7 @@ class TrackCollectionViewCell: UICollectionViewCell {
     
     var trackLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 19)
+        label.font = UIFont.systemFont(ofSize: 17.5)
         label.textColor = .white
         return label
     }()
@@ -61,7 +61,7 @@ class TrackCollectionViewCell: UICollectionViewCell {
         
         view.addSubview(self.trackLabel)
         view.addConstraintsWithFormat("H:|-[v0]|", views: self.trackLabel)
-        view.addConstraintsWithFormat("V:[v0(35)][v1]", views: self.trackLabel, self.artistLabel)
+        view.addConstraintsWithFormat("V:[v0(30)][v1]", views: self.trackLabel, self.artistLabel)
         
         return view
     }()

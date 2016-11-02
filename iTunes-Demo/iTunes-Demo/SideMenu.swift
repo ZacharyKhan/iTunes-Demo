@@ -10,8 +10,9 @@ import UIKit
 
 class SideMenu: UIView {
     
+    var delegate : SideMenuDelegate?
+    let genreArray = ["All", "Electronic", "Country", "Hip-Hop/Rap", "Jazz", "Pop", "Rock", "Soul", "Reggae", "Dance", "Alternative"]
     var isShown : Bool?
-    
     private var currentWindow : UIWindow?
 
     private lazy var collectionView : UICollectionView = {
@@ -20,8 +21,8 @@ class SideMenu: UIView {
         cv.delegate = self
         cv.dataSource = self
         cv.backgroundColor = .clear
-        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "menuCell")
-        cv.contentInset.top = 64
+        cv.register(MenuCellCollectionViewCell.self, forCellWithReuseIdentifier: "menuCell")
+        cv.contentInset.top = 2
         return cv
     }()
     
@@ -42,17 +43,16 @@ class SideMenu: UIView {
         self.addSubview(collectionView)
         self.addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         self.addConstraintsWithFormat("V:|[v0]|", views: collectionView)
-        
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(hide))
-        collectionView.addGestureRecognizer(gesture)
     }
     
     func show() {
-        currentWindow?.addSubview(self)
-        UIView.animate(withDuration: 0.3, animations: {
-            self.frame.origin.x += self.bounds.width
-        }) { (value) in
+        if self.isShown != true {
             self.isShown = true
+            currentWindow?.addSubview(self)
+            UIView.animate(withDuration: 0.3, animations: {
+                self.frame.origin.x += self.bounds.width
+            }) { (value) in
+            }
         }
     }
     
@@ -73,12 +73,12 @@ extension SideMenu : UICollectionViewDelegate, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.genreArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "menuCell", for: indexPath)
-        cell.backgroundColor = .orange
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "menuCell", for: indexPath) as! MenuCellCollectionViewCell
+        cell.nameLabel.text = self.genreArray[indexPath.item]
         return cell
     }
     
@@ -91,4 +91,10 @@ extension SideMenu : UICollectionViewDelegate, UICollectionViewDataSource, UICol
         return 2
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        self.delegate?.didSelectItem(at: indexPath.item, withTitle: self.genreArray[indexPath.item])
+        
+        hide()
+    }
 }

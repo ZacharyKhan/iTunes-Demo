@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D51C65721DC9ABA500DF05F9 /* Top40DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51C65711DC9ABA500DF05F9 /* Top40DetailViewController.swift */; };
 		D51C65751DC9C2F500DF05F9 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51C65741DC9C2F500DF05F9 /* SideMenu.swift */; };
+		D51C65771DC9D6D400DF05F9 /* MenuCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51C65761DC9D6D400DF05F9 /* MenuCellCollectionViewCell.swift */; };
+		D51C65791DC9D98A00DF05F9 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51C65781DC9D98A00DF05F9 /* Protocols.swift */; };
 		D5ABE49C1DC83DFC00F72BCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ABE49B1DC83DFC00F72BCD /* AppDelegate.swift */; };
 		D5ABE49E1DC83DFC00F72BCD /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ABE49D1DC83DFC00F72BCD /* SearchViewController.swift */; };
 		D5ABE4A31DC83DFC00F72BCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5ABE4A21DC83DFC00F72BCD /* Assets.xcassets */; };
@@ -49,6 +51,8 @@
 /* Begin PBXFileReference section */
 		D51C65711DC9ABA500DF05F9 /* Top40DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Top40DetailViewController.swift; sourceTree = "<group>"; };
 		D51C65741DC9C2F500DF05F9 /* SideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
+		D51C65761DC9D6D400DF05F9 /* MenuCellCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCellCollectionViewCell.swift; sourceTree = "<group>"; };
+		D51C65781DC9D98A00DF05F9 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		D5ABE4981DC83DFC00F72BCD /* iTunes-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iTunes-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5ABE49B1DC83DFC00F72BCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5ABE49D1DC83DFC00F72BCD /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 			children = (
 				D5ABE49B1DC83DFC00F72BCD /* AppDelegate.swift */,
 				D5ABE4CA1DC8420B00F72BCD /* Extensions.swift */,
+				D51C65781DC9D98A00DF05F9 /* Protocols.swift */,
 				D5ABE4C91DC840F500F72BCD /* Controller */,
 				D5AD5FB81DC85728002F3D34 /* Data Object */,
 				D5AD5FBF1DC8768D002F3D34 /* Cell */,
@@ -180,6 +185,7 @@
 			children = (
 				D5AD5FC01DC876B7002F3D34 /* TableViewCells.swift */,
 				D5AD5FCC1DC88D27002F3D34 /* TrackCollectionViewCell.swift */,
+				D51C65761DC9D6D400DF05F9 /* MenuCellCollectionViewCell.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -323,11 +329,13 @@
 				D5AD5FC91DC8890C002F3D34 /* Top40ViewController.swift in Sources */,
 				D5ABE4CB1DC8420B00F72BCD /* Extensions.swift in Sources */,
 				D5AD5FBC1DC86C27002F3D34 /* Track.swift in Sources */,
+				D51C65791DC9D98A00DF05F9 /* Protocols.swift in Sources */,
 				D51C65721DC9ABA500DF05F9 /* Top40DetailViewController.swift in Sources */,
 				D5ABE49E1DC83DFC00F72BCD /* SearchViewController.swift in Sources */,
 				D5ABE49C1DC83DFC00F72BCD /* AppDelegate.swift in Sources */,
 				D5AD5FC11DC876B7002F3D34 /* TableViewCells.swift in Sources */,
 				D51C65751DC9C2F500DF05F9 /* SideMenu.swift in Sources */,
+				D51C65771DC9D6D400DF05F9 /* MenuCellCollectionViewCell.swift in Sources */,
 				D5AD5FCD1DC88D27002F3D34 /* TrackCollectionViewCell.swift in Sources */,
 				D5AD5FBA1DC85749002F3D34 /* Artist.swift in Sources */,
 			);
