@@ -51,6 +51,7 @@ class ArtistTableViewCell: UITableViewCell {
         
     }
 
+
 }
 
 class TrackTableViewCell: UITableViewCell {

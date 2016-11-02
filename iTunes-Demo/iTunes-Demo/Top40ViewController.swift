@@ -34,6 +34,13 @@ class Top40ViewController: UIViewController {
 
         setupView()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        if self.player != nil {
+            self.player?.stop()
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -87,7 +94,7 @@ class Top40ViewController: UIViewController {
                 if let object: AnyObject = response["feed"] {
                     if let entry : [AnyObject] = object["entry"] as? [AnyObject] {
                         for dictionary in entry {
-                            print(dictionary)
+                            
                             if let name = dictionary["im:name"] as? NSDictionary, let artist = dictionary["im:artist"] as? NSDictionary, let preview = dictionary["link"] as? NSArray, let imageURLArray = dictionary["im:image"] as? NSArray, let category = dictionary["category"] as? NSDictionary {
                                 
                                 if let attributes = (preview.lastObject! as? NSDictionary)?["attributes"] as? NSDictionary, let url = (imageURLArray.lastObject! as? NSDictionary)?["label"] as? String, let nameLabel = name["label"] as? String, let artistLabel = artist["label"] as? String, let genreAttributes = category["attributes"] as? NSDictionary {
@@ -156,9 +163,13 @@ extension Top40ViewController : UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? Top40CollectionViewCell {
             
+            if self.player != nil {
+                self.player?.stop()
+            }
+            
             do {
                 let fileURL = NSURL(string: cell.previewURL!)
-                let soundData = NSData(contentsOf:fileURL! as URL)
+                let soundData = NSData(contentsOf: fileURL! as URL)
                 self.player = try AVAudioPlayer(data: soundData! as Data)
                 self.player?.prepareToPlay()
                 self.player?.volume = 1.0

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class SearchViewController: UIViewController {
     
@@ -15,6 +16,8 @@ class SearchViewController: UIViewController {
     
     let defaultSession = URLSession(configuration: URLSessionConfiguration.default)
     var dataTask: URLSessionDataTask?
+    
+    var player : AVAudioPlayer? = nil
     
     var searchArtistResults : [Artist] = []
     var searchTrackResults : [Track] = []
@@ -53,6 +56,15 @@ class SearchViewController: UIViewController {
         setupView()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        if self.player != nil {
+            self.player?.stop()
+        }
+        
+    }
+    
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -123,11 +135,32 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
         return 60
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.searchController.searchBar.selectedScopeButtonIndex != 0 {
+            
+            if self.player != nil {
+                self.player?.stop()
+            }
+            
+            do {
+                let fileURL = NSURL(string: self.searchTrackResults[indexPath.row].previewUrl!)
+                let soundData = NSData(contentsOf: fileURL! as URL)
+                self.player = try AVAudioPlayer(data: soundData! as Data)
+                self.player?.prepareToPlay()
+                self.player?.volume = 1.0
+                self.player?.play()
+            } catch {
+                print("Error getting the audio file")
+            }
+            
+        }
+    }
+    
     // SEARCH RESULTS UPDATING
     
     func updateSearchResults(for searchController: UISearchController) {
         
-        if !searchController.searchBar.text!.isEmpty {
+        if !searchController.searchBar.text!.isEmpty, (searchController.searchBar.text?.characters.count)! >= 3 {
             
             let searchTerm = searchController.searchBar.text!
             
@@ -161,15 +194,18 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
             self.searchArtistResults.removeAll()
             self.searchTrackResults.removeAll()
         
+        print(data!)
+        
         do {
             if let data = data, let response = try JSONSerialization.jsonObject(with: data as Data, options:JSONSerialization.ReadingOptions(rawValue:0)) as? [String: AnyObject] {
+                print(data)
                 
                 // Get the results array
                 if let array: AnyObject = response["results"] {
-                    
+                    print(array)
                     //each result is a dictionary
                     for dictionary in array as! [AnyObject] {
-                        
+                        print(dictionary)
                         // objects are nested dictionaries
                         if let object = dictionary as? [String: AnyObject] {
                             
