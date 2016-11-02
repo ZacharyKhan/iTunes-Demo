@@ -160,11 +160,11 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
     
     func updateSearchResults(for searchController: UISearchController) {
         
-        if !searchController.searchBar.text!.isEmpty, (searchController.searchBar.text?.characters.count)! >= 1 {
+        if !searchController.searchBar.text!.isEmpty, (searchController.searchBar.text?.characters.count)! >= 2 {
             
-            let searchTerm = searchController.searchBar.text!
+            let searchTerm = searchController.searchBar.text!.replacingOccurrences(of: " ", with: "")
             
-            if let url : NSURL = NSURL(string: "https://itunes.apple.com/search?media=music&entity=\(entityArray[searchController.searchBar.selectedScopeButtonIndex])&term=\(searchTerm)&limit=15") {
+            if let url : NSURL = NSURL(string: "https://itunes.apple.com/search?media=music&entity=\(entityArray[searchController.searchBar.selectedScopeButtonIndex])&term=\(searchTerm)&limit=5") {
                 findData(with: url as URL, selectedScopeIndex: searchController.searchBar.selectedScopeButtonIndex)
             }
         }
@@ -250,7 +250,7 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource, UIS
         }
 
         
-        if let url : NSURL = NSURL(string: "https://itunes.apple.com/search?media=music&entity=\(entityArray[selectedScope])&term=\(searchBar.text!)&limit=15"), !(searchBar.text?.isEmpty)! {
+        if let url : NSURL = NSURL(string: "https://itunes.apple.com/search?media=music&entity=\(entityArray[selectedScope])&term=\(searchBar.text!)&limit=5"), !(searchBar.text?.isEmpty)! {
             findData(with: url as URL, selectedScopeIndex: selectedScope)
         }
     }
